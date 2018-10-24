@@ -115,9 +115,10 @@ class DcCourtCollector(Cmd):
         #Identify the court access portal
         url = 'https://eaccess.dccourts.gov/eaccess/'
 
+        print("When the page has /completely/ finished loading,\nenter the captcha text here.\n(The loading wheel may spin for quite awhile...)\n")
         #Fetch the court access portal homepage
         browser.get(url)
-        print("When the page has /completely/ finished loading,\nenter the captcha text here.\n(The loading wheel may spin for quite awhile...)\n")
+
 
         #Prompt the user to answer the captcha
         captcha = input("[Captcha]: ")
@@ -146,7 +147,17 @@ class DcCourtCollector(Cmd):
         #to scrape by subtracting the end case number from the beginning one
         collection_count = 0
 
-        if type(end) is int:
+        #Assume the end point given is a case
+        end_is_case = True
+        #Attempt to parse the end point as a case count instead
+        #If you succeed, the end point isn't a case
+        try:
+            end = int(end)
+            end_is_case = False
+        except:
+            pass
+
+        if type(end) is int and not end_is_case:
             collection_limit = end
         #Otherwise, parse the end case reference and deduce the number of cases by subtracting
         #it's case number from the starting case's number

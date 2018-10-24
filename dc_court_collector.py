@@ -117,9 +117,10 @@ class DcCourtCollector(Cmd):
 
         #Fetch the court access portal homepage
         browser.get(url)
+        print("When the page has /completely/ finished loading,\nenter the captcha text here.\n(The loading wheel may spin for quite awhile...)\n")
 
         #Prompt the user to answer the captcha
-        captcha = input("When the page has /completely/ finished loading,\nenter the captcha text here.\n(The loading wheel may spin for quite awhile...)\n[Captcha]: ")
+        captcha = input("[Captcha]: ")
 
         #Clear the captcha form, then enter the captcha & submit
         browser.find_element_by_id('id3').clear()

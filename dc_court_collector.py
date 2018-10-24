@@ -110,7 +110,7 @@ class DcCourtCollector(Cmd):
         #https://sites.google.com/a/chromium.org/chromedriver/downloads
         #(You may need to include the path to the driver as your first
         #variable in webdriver.Chrome, if the webdriver is not in your PATH)
-        browser = webdriver.Chrome(chrome_options = chrome_options)
+        browser = webdriver.Chrome(options = chrome_options)
 
         #Identify the court access portal
         url = 'https://eaccess.dccourts.gov/eaccess/'

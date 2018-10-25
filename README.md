@@ -22,3 +22,5 @@ A tool for turning the District of Columbia's eAccess Court Portal's pages into 
     (see https://stackoverflow.com/questions/20060096/installing-pil-with-pip)
   - tesserocr (for OCRing PDFs)
   - NOTE: Tesserocr depends on Tesseract: https://github.com/tesseract-ocr/
+  - NOTE: Tesseract also needs its English-language training materials:
+  See the guide at http://guides.library.illinois.edu/c.php?g=347520&p=4121425

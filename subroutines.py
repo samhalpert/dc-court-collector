@@ -50,6 +50,13 @@ def cleanup_data():
     #Case data should be stored in the same folder as the script files, in a subfolder called "case_data"
     data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'case_data')
 
+    final_file = os.path.join(os.path.dirname(os.path.abspath(__file__)),'final.json')
+
+    if os.path.isfile(final_file) is False:
+        f = open(final_file,"w+")
+        f.write("{}")
+        f.close()
+
     #Open the current version of "final.json" (the json file in the root folder that is currently
     #where all collected cases are stored) and read it into a variable
     with open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'final.json'),'r') as final_file:
@@ -142,7 +149,8 @@ def collect_parties(browser,case):
 
         #Find the information within the party element about the party's disposition
         #and add that information to the current party object
-        party_disposition = party.find_element_by_xpath("//*[contains(text(), 'Disposition')]//following-sibling::dd[1]").text
+        #party_disposition = party.find_element_by_xpath("//*[contains(text(), 'Disposition')]//following-sibling::dd[1]").text
+        party_disposition = party.find_element_by_xpath("//*[contains(text(), 'Disposition')]//following-sibling::li").text
         current_party['Disposition'] = party_disposition
 
         #Check to see if the party has any attorneys
@@ -156,8 +164,11 @@ def collect_parties(browser,case):
         if attorneys:
             current_party['Attorneys'] = []
             for attorney in attorneys:
-                attorney_name = attorney.find_element_by_css_selector("dd").text
-                current_party['Attorneys'].append(attorney_name)
+                try:
+                    attorney_name = attorney.find_element_by_css_selector("ptyAttyInfo").text
+                    current_party['Attorneys'].append(attorney_name)
+                except:
+                    pass
 
 def collect_table(browser,case,type):
     #Thankfully, several areas in the case page follow a similar format

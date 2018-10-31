@@ -56,7 +56,7 @@ class DcCourtCollector(Cmd):
 
         #Open the final.json again, this time to read it and print a sorted list of its
         #keys for the shell user
-        with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'final.json')) as file:
+        with open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'final.json')) as file:
             data = file.read()
             data = json.loads(data)
 
@@ -75,7 +75,7 @@ class DcCourtCollector(Cmd):
         """The collection tool sometimes runs into issues when browsing the DC eAccess
         site that cause it to fail. When this happens, the temporary JSON files it creates
         to store collected cases are left behind, and some downloaded documents are not OCR'ed.
-        Run cleanupData to OCR any outstanding documents. The program also deletes any
+        Run cleanupData to OCR any outstanding documents. The routine also deletes any
         downloaded PDFs that were not properly associated with a case due to an error.
         Ex: cleanupDocs
         """
